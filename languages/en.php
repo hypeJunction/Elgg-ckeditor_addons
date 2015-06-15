@@ -1,4 +1,5 @@
 <?php
+
 return array(
 	'ckeditor:settings:user' => 'Enable for Users',
 	'ckeditor:settings:admin' => 'Enable for Admins',
@@ -17,5 +18,11 @@ return array(
 	'ckeditor:upload:not_allowed' => 'Uploads have been disabled by the site administrator',
 	'ckeditor:setting:upload_max_width' => 'Maximum dimension of the uploaded image (in px)',
 	'ckeditor:browse:no_uploads' => 'You have not uploaded any images yet',
+	
+	'ckeditor:link:target:notset' => 'Default',
+	'ckeditor:link:target:blank' => 'New Tab',
+	
+	'ckeditor:attributes:type:url' => 'URL',
+	'ckeditor:attributes:type:email' => 'Email',
 	
 );

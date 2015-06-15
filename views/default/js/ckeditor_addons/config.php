@@ -11,6 +11,7 @@ foreach ($tags as $tag) {
 	$params = array('tag' => $tag);
 	$extra_allowed_content[$tag]['styles'] = elgg_trigger_plugin_hook('allowed_styles', 'htmlawed', $params, $allowed_styles);
 }
+$extra_allowed_content['a']['attributes'] = '!href,target,title';
 
 $path = elgg_normalize_url('mod/ckeditor/vendors/ckeditor/');
 $config = [
@@ -26,7 +27,7 @@ $config = [
 	'contentsCss' => elgg_get_simplecache_url('css', 'elgg/wysiwyg.css'),
 	'disableNativeSpellChecker' => false,
 	'disableNativeTableHandles' => false,
-	'removeDialogTabs' => ['image:advanced', 'image:Link', 'link:advanced', 'link:target'],
+	'removeDialogTabs' => ['image:advanced', 'image:Link'],
 	'extraAllowedContent' => $extra_allowed_content,
 ];
 
