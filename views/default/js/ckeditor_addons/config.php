@@ -1,4 +1,17 @@
 <?php
+$tags = array('a', 'p', 'div', 'span', 'img');
+$allowed_styles = array('color', 'cursor', 'text-align', 'vertical-align', 'font-size',
+	'font-weight', 'font-style', 'border', 'border-top', 'background-color',
+	'border-bottom', 'border-left', 'border-right',
+	'margin', 'margin-top', 'margin-bottom', 'margin-left',
+	'margin-right', 'padding', 'float', 'text-decoration'
+);
+$extra_allowed_content = array();
+foreach ($tags as $tag) {
+	$params = array('tag' => $tag);
+	$extra_allowed_content[$tag]['styles'] = elgg_trigger_plugin_hook('allowed_styles', 'htmlawed', $params, $allowed_styles);
+}
+
 $path = elgg_normalize_url('mod/ckeditor/vendors/ckeditor/');
 $config = [
 	'toolbar' => ckeditor_addons_get_toolbar(),
@@ -14,6 +27,7 @@ $config = [
 	'disableNativeSpellChecker' => false,
 	'disableNativeTableHandles' => false,
 	'removeDialogTabs' => ['image:advanced', 'image:Link', 'link:advanced', 'link:target'],
+	'extraAllowedContent' => $extra_allowed_content,
 ];
 
 $plugins = ['blockimagepaste' => ['path' => elgg_normalize_url('mod/ckeditor/views/default/js/elgg/ckeditor/blockimagepaste.js')]];
@@ -42,7 +56,6 @@ if (ckeditor_addons_is_enabled('Tooltip')) {
 $config['removePlugins'] = implode(',', $config['removePlugins']);
 $config['extraPlugins'] = implode(',', $config['extraPlugins']);
 $config['removeDialogTabs'] = implode(';', $config['removeDialogTabs']);
-
 ?>
 
 //<script>
