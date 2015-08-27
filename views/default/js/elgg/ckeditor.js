@@ -84,53 +84,24 @@ define(function (require) {
 	};
 
 	CKEDITOR.on('dialogDefinition', function (ev) {
+	CKEDITOR.on('dialogDefinition', function (ev) {
 		// Take the dialog name and its definition from the event data.
 		var dialogName = ev.data.name;
 		var dialogDefinition = ev.data.definition;
 
 		// Check if the definition is from the dialog we are interested in (the 'link' dialog)
 		if (dialogName == 'link') {
-			dialogDefinition.onShow = function () {
-				var dialog = CKEDITOR.dialog.getCurrent();
 
-				var linkType = dialog.getContentElement('info', 'linkType');
-				if (linkType) {
-					linkType.clear();
-					linkType.add(elgg.echo('ckeditor:attributes:type:url'), 'url');
-					linkType.add(elgg.echo('ckeditor:attributes:type:email'), 'email');
-					linkType.setValue('url');
-				}
+			var targetTab = dialogDefinition.getContents('target');
+			var removeTargetTypes = ['frame', 'popup', '_top', '_parent', '_self'];
+			targetTab.get('linkTargetType')['items'] = targetTab.get('linkTargetType')['items'].filter(function (e) {
+				return removeTargetTypes.indexOf(e[1]) === -1;
+			});
 
-				var removeAttr = {
-					id: 'advId',
-					dir: 'advLangDir',
-					accessKey: 'advAccessKey',
-					name: 'advName',
-					lang: 'advLangCode',
-					tabindex: 'advTabIndex',
-					type: 'advContentType',
-					'class': 'advCSSClasses',
-					charset: 'advCharset',
-					style: 'advStyles',
-					rel: 'advRel'
-				};
-
-				$.each(removeAttr, function (index, value) {
-					var elem = dialog.getContentElement('advanced', value);
-					if (elem) {
-						elem.getElement().hide()
-					}
-				});
-
-				var linkTargetType = dialog.getContentElement('target', 'linkTargetType');
-				if (linkTargetType) {
-					linkTargetType.clear();
-					linkTargetType.add(elgg.echo('ckeditor:link:target:notset'), 'notSet');
-					linkTargetType.add(elgg.echo('ckeditor:link:target:blank'), '_blank');
-					linkTargetType.setValue('notSet');
-				}
-				
-			};
+			var removeAttr = ['advId', 'advLangDir', 'advAccessKey', 'advName', 'advLangCode', 'advTabIndex', 'advContentType', 'advCSSClasses', 'advCharset', 'advStyles', 'advRel'];
+			$.each(removeAttr, function (index, value) {
+				dialogDefinition.getContents('advanced').remove(value);
+			});
 		}
 	});
 
