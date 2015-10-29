@@ -1,3 +1,8 @@
 <?php
-
-elgg_require_js('ckeditor_addons/linkembed/embed');
+/**
+ * Initialize linkembed plugin script
+ */
+?>
+<script>
+	require(['components/ckeditor/linkembed/embed']);
+</script>
