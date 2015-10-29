@@ -8,8 +8,8 @@ elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
  */
 function ckeditor_addons_init() {
 
-	elgg_unextend_view('js/elgg', 'js/elgg/ckeditor/set-basepath.js');
-	elgg_extend_view('js/elgg', 'js/ckeditor_addons/config');
+	elgg_unextend_view('elgg.js', 'elgg/ckeditor/set-basepath.js');
+	elgg_extend_view('elgg.js', 'ckeditor_addons/config');
 
 	elgg_register_action('ckeditor_addons/settings/save', __DIR__ . '/actions/settings/save.php', 'admin');
 	elgg_register_action('ckeditor/upload', __DIR__ . '/actions/ckeditor/upload.php');
@@ -17,7 +17,7 @@ function ckeditor_addons_init() {
 	elgg_register_page_handler('ckeditor', 'ckeditor_addons_page_handler');
 
 	if (elgg_is_active_plugin('hypeScraper')) {
-		elgg_extend_view('css/elgg', 'css/ckeditor/linkembed.css');
+		elgg_extend_view('elgg.css', 'ckeditor/linkembed.css');
 		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
 	}
 }
