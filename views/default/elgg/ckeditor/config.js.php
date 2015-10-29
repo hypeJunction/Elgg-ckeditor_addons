@@ -61,8 +61,9 @@ $config['removeDialogTabs'] = implode(';', $config['removeDialogTabs']);
 
 //<script>
 
-	elgg.ckeditor = elgg.ckeditor || {};
-	CKEDITOR_BASEPATH = '<?php echo $path ?>';
-	elgg.ckeditor.config = <?php echo json_encode($config) ?>;
-	elgg.ckeditor.plugins = <?php echo json_encode($plugins) ?>;
-	
+	define(['elgg'], function (elgg) {
+		return {
+			config: <?php echo json_encode($config) ?>,
+			plugins: <?php echo json_encode($plugins) ?>
+		};
+	});
