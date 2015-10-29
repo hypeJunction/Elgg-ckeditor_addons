@@ -3,7 +3,7 @@
     
 	<name>CKEditor AddOns</name>
 	<id>ckeditor_addons</id>
-	<version type="dist">1.0.1</version>
+	<version type="dist">2.0.0</version>
 
 	<description>Extensions for CKEditor</description>
 	<category>education</category>
