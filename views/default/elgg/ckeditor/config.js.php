@@ -13,7 +13,7 @@ foreach ($tags as $tag) {
 }
 $extra_allowed_content['a']['attributes'] = '!href,target,title';
 
-$path = elgg_normalize_url('mod/ckeditor/vendors/ckeditor/');
+$path = elgg_get_simplecache_url('ckeditor/');
 $config = [
 	'toolbar' => ckeditor_addons_get_toolbar(),
 	'allowedContent' => true,
@@ -24,14 +24,14 @@ $config = [
 	'language' => get_language(),
 	'skin' => 'moono',
 	'uiColor' => '#EEEEEE',
-	'contentsCss' => elgg_get_simplecache_url('css', 'elgg/wysiwyg.css'),
+	'contentsCss' => elgg_get_simplecache_url('elgg/wysiwyg.css'),
 	'disableNativeSpellChecker' => false,
 	'disableNativeTableHandles' => false,
 	'removeDialogTabs' => ['image:advanced', 'image:Link'],
 	'extraAllowedContent' => $extra_allowed_content,
 ];
 
-$plugins = ['blockimagepaste' => ['path' => elgg_normalize_url('mod/ckeditor/views/default/js/elgg/ckeditor/blockimagepaste.js')]];
+$plugins = ['blockimagepaste' => ['path' => elgg_get_simplecache_url('elgg/ckeditor/blockimagepaste.js')]];
 
 if (ckeditor_addons_is_enabled('Image')) {
 	if (elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons')) {
@@ -46,12 +46,12 @@ if (ckeditor_addons_is_enabled('Image')) {
 
 if (ckeditor_addons_is_enabled('LinkEmbed') && elgg_is_active_plugin('hypeScraper')) {
 	$config['extraPlugins'][] = 'linkembed';
-	$plugins['linkembed'] = ['path' => elgg_normalize_url('mod/ckeditor_addons/views/default/js/ckeditor_addons/linkembed.js')];
+	$plugins['linkembed'] = ['path' => elgg_get_simplecache_url('components/ckeditor/linkembed.js')];
 }
 
 if (ckeditor_addons_is_enabled('Tooltip')) {
 	$config['extraPlugins'][] = 'tooltip';
-	$plugins['tooltip'] = ['path' => elgg_normalize_url('mod/ckeditor_addons/views/default/js/ckeditor_addons/tooltip.js')];
+	$plugins['tooltip'] = ['path' => elgg_get_simplecache_url('components/ckeditor/tooltip.js')];
 }
 
 $config['removePlugins'] = implode(',', $config['removePlugins']);
@@ -61,8 +61,9 @@ $config['removeDialogTabs'] = implode(';', $config['removeDialogTabs']);
 
 //<script>
 
-	elgg.ckeditor = elgg.ckeditor || {};
-	CKEDITOR_BASEPATH = '<?php echo $path ?>';
-	elgg.ckeditor.config = <?php echo json_encode($config) ?>;
-	elgg.ckeditor.plugins = <?php echo json_encode($plugins) ?>;
-	
+	define(['elgg'], function (elgg) {
+		return {
+			config: <?php echo json_encode($config) ?>,
+			plugins: <?php echo json_encode($plugins) ?>
+		};
+	});

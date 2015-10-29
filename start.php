@@ -8,8 +8,7 @@ elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
  */
 function ckeditor_addons_init() {
 
-	elgg_unextend_view('js/elgg', 'js/elgg/ckeditor/set-basepath.js');
-	elgg_extend_view('js/elgg', 'js/ckeditor_addons/config');
+	elgg_register_simplecache_view('elgg/ckeditor/config.js');
 
 	elgg_register_action('ckeditor_addons/settings/save', __DIR__ . '/actions/settings/save.php', 'admin');
 	elgg_register_action('ckeditor/upload', __DIR__ . '/actions/ckeditor/upload.php');
@@ -17,11 +16,18 @@ function ckeditor_addons_init() {
 	elgg_register_page_handler('ckeditor', 'ckeditor_addons_page_handler');
 
 	if (elgg_is_active_plugin('hypeScraper')) {
-		elgg_extend_view('css/elgg', 'css/ckeditor/linkembed.css');
+		elgg_extend_view('elgg.css', 'components/ckeditor/linkembed.css');
 		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
 	}
+
 }
 
+/**
+ * Returns toolbar settings
+ *
+ * @param string $type User type 'admin'|'user'
+ * @return array
+ */
 function ckeditor_addons_get_toolbar($type = null) {
 	$toolbar_config = elgg_get_plugin_setting('toolbar_config', 'ckeditor_addons');
 	if ($toolbar_config) {
@@ -53,11 +59,19 @@ function ckeditor_addons_get_toolbar($type = null) {
 	return array_values($options);
 }
 
+/**
+ * Returns buttons enabled by default
+ * @return array
+ */
 function ckeditor_addons_get_toolbar_defaults() {
 	$defaults = ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Strike', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'Image', 'Blockquote', 'Paste', 'PasteFromWord', 'Maximize'];
 	return elgg_trigger_plugin_hook('toolbar:defaults', 'ckeditor', null, $defaults);
 }
 
+/**
+ * Returns toolbar buttons by group
+ * @return array
+ */
 function ckeditor_addons_get_toolbar_options() {
 	$options = [
 		'basicstyles' => ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat'],
@@ -75,6 +89,13 @@ function ckeditor_addons_get_toolbar_options() {
 	return elgg_trigger_plugin_hook('toolbar:options', 'ckeditor', null, $options);
 }
 
+/**
+ * Checks if given addon is enabled
+ *
+ * @param string $button Button
+ * @param string $type   User type
+ * @return boolean
+ */
 function ckeditor_addons_is_enabled($button = '', $type = null) {
 
 	$options = ckeditor_addons_get_toolbar($type);
@@ -86,6 +107,12 @@ function ckeditor_addons_is_enabled($button = '', $type = null) {
 	return false;
 }
 
+/**
+ * Handles browser pages
+ *
+ * @param array $segments An array of URL segments
+ * @return boolean
+ */
 function ckeditor_addons_page_handler($segments) {
 
 	if (!elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons')) {
@@ -94,7 +121,7 @@ function ckeditor_addons_page_handler($segments) {
 
 	switch ($segments[0]) {
 		case 'browse':
-			echo elgg_view('resources/ckeditor/browse');
+			echo elgg_view_resource('ckeditor/browse');
 			return true;
 
 		case 'image' :
