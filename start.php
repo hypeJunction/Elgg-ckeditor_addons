@@ -20,6 +20,8 @@ function ckeditor_addons_init() {
 		elgg_extend_view('elgg.css', 'ckeditor/linkembed.css');
 		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
 	}
+
+	elgg_register_simplecache_view('ckeditor_addons/config.js');
 }
 
 function ckeditor_addons_get_toolbar($type = null) {
