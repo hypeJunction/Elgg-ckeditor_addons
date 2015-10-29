@@ -5,10 +5,11 @@ define(function (require) {
 
 	CKEDITOR_BASEPATH = elgg.get_simplecache_url('ckeditor/');
 	require('jquery.ckeditor');
-	
+
+	var config = require('elgg/ckeditor/config');
 	var CKEDITOR = require('ckeditor');
 
-	$.each(elgg.ckeditor.plugins, function (index, plugin) {
+	$.each(config.plugins, function (index, plugin) {
 		var names = plugin.names || index,
 				path = plugin.path,
 				fileName = plugin.filename || '';
@@ -82,7 +83,7 @@ define(function (require) {
 		 * You can find configuration information here:
 		 * http://docs.ckeditor.com/#!/api/CKEDITOR.config
 		 */
-		config: require('elgg/ckeditor/config')
+		config: config.config
 
 	};
 
