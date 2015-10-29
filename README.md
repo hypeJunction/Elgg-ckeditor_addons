@@ -1,11 +1,11 @@
 Extensions for CKEditor in Elgg
 ===============================
-![Elgg 1.11.x](https://img.shields.io/badge/Elgg-1.11.x-yellowgreen.svg)
+![Elgg 2.0.x](https://img.shields.io/badge/Elgg-2.0.x-yellowgreen.svg)
 
 ### Features
 
 * Separate editor configuration for regular users and admins
-* Easy to user admin interface
+* Easy to use admin interface
 * Simple file uploads and embeds (no file entities)
 * Simple and htmlawed-compatible link embeds (using hypeScraper)
 * Text tooltips
