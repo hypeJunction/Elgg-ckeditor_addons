@@ -1,8 +1,11 @@
 define(function (require) {
+
 	var elgg = require('elgg');
 	var $ = require('jquery');
-	require('jquery.ckeditor');
 
+	CKEDITOR_BASEPATH = elgg.get_simplecache_url('ckeditor/');
+	require('jquery.ckeditor');
+	
 	var CKEDITOR = require('ckeditor');
 
 	$.each(elgg.ckeditor.plugins, function (index, plugin) {

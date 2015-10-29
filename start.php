@@ -8,8 +8,7 @@ elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
  */
 function ckeditor_addons_init() {
 
-	elgg_unextend_view('elgg.js', 'elgg/ckeditor/set-basepath.js');
-	elgg_extend_view('elgg.js', 'ckeditor_addons/config');
+	elgg_register_simplecache_view('elgg/ckeditor/config.js');
 
 	elgg_register_action('ckeditor_addons/settings/save', __DIR__ . '/actions/settings/save.php', 'admin');
 	elgg_register_action('ckeditor/upload', __DIR__ . '/actions/ckeditor/upload.php');
@@ -21,7 +20,6 @@ function ckeditor_addons_init() {
 		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
 	}
 
-	elgg_register_simplecache_view('ckeditor_addons/config.js');
 }
 
 function ckeditor_addons_get_toolbar($type = null) {
