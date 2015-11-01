@@ -17,5 +17,5 @@ The plugin has been commissioned and sponsored by Bodyology School of Massage.
 
 ### Screenshots
 
-![WYSIWYG](https://raw.github.com/hypeJunction/ckeditor_addons/master/screenshots/ckeditor.png "WYSIWYG")
-![Settings](https://raw.github.com/hypeJunction/ckeditor_addons/master/screenshots/config.png "Plugin settings")
+![WYSIWYG](https://raw.github.com/hypeJunction/Elgg-ckeditor_addons/master/screenshots/ckeditor.png "WYSIWYG")
+![Settings](https://raw.github.com/hypeJunction/Elgg-ckeditor_addons/master/screenshots/config.png "Plugin settings")

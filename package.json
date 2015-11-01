@@ -4,9 +4,9 @@
 	"license": "GPL-2.0",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:hypeJunction/ckeditor_addons.git",
+		"url": "git@github.com:hypeJunction/Elgg-ckeditor_addons.git",
 		"owner": "hypeJunction",
-		"repo": "ckeditor_addons"
+		"repo": "Elgg-ckeditor_addons"
 	},
 	"devDependencies": {
 		"curlrequest": "^0.3.10",
