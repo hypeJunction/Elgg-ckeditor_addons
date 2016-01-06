@@ -8,6 +8,10 @@ $ck_dir = $data_root . $user_dir . 'ckeditor/';
 
 $images = array();
 
+if (!is_dir($ck_dir)) {
+	mkdir($ck_dir, 0700, true);
+}
+
 $dir = new \DirectoryIterator($ck_dir);
 
 foreach ($dir as $file) {
