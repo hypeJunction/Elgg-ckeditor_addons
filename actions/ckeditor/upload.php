@@ -16,7 +16,7 @@ if ($_FILES['upload']['error'] != UPLOAD_ERR_OK) {
 
 $user = elgg_get_logged_in_user_entity();
 
-$max_width = (int) elgg_get_plugin_setting('upload_max_width', 'ckeditor_addons');
+$max_width = (int) elgg_get_plugin_setting('upload_max_width', 'ckeditor_addons', 600);
 $resized = get_resized_image_from_existing_file($_FILES['upload']['tmp_name'], $max_width, $max_width);
 
 if (!$resized) {
