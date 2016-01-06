@@ -1,3 +1,15 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.1...v2.0.2) (2016-01-06)
+
+
+### Bug Fixes
+
+* **browser:** fix file browser styling and JS ([9b34f2e](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/9b34f2e))
+* **browser:** fix file browser styling and JS ([bdf2ed0](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/bdf2ed0))
+* **settings:** fix default values on activation ([7c00df0](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/7c00df0))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/1.0.1...v2.0.1) (2015-11-01)
 
