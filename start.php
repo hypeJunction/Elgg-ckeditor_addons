@@ -16,11 +16,11 @@ function ckeditor_addons_init() {
 	elgg_register_page_handler('ckeditor', 'ckeditor_addons_page_handler');
 
 	if (elgg_is_active_plugin('hypeScraper')) {
-		elgg_extend_view('css/elgg', 'components/ckeditor/linkembed.css');
+		elgg_extend_view('elgg.css', 'components/ckeditor/linkembed.css');
 		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
 	}
 
-	elgg_extend_view('css/elgg', 'components/ckeditor/browser.css');
+	elgg_extend_view('elgg.css', 'components/ckeditor/browser.css');
 
 }
 
