@@ -43,15 +43,20 @@ if (empty($images)) {
 			), implode('', $images));
 }
 
+$head = elgg_view('page/elements/head');
+$foot = elgg_view('page/elements/foot');
 echo elgg_view('page/elements/html', array(
-	'head' => elgg_view('page/elements/head'),
-	'body' => $output,
+	'head' => $head,
+	'body' => elgg_format_element('div', array('class' => 'ckeditor-addons-browser'), $output) . $foot,
 ));
 ?>
 <script>
-	$(document).on('click', '.ckeditor-browser-image[data-callback]', function (e) {
-		e.preventDefault();
-		window.opener.CKEDITOR.tools.callFunction($(this).data('callback'), $(this).attr('src'), '');
-		window.close();
+	require(['jquery'], function ($) {
+		console.log(window);
+		$(document).on('click', '.ckeditor-browser-image[data-callback]', function (e) {
+			e.preventDefault();
+			window.opener.CKEDITOR.tools.callFunction($(this).data('callback'), $(this).attr('src'), '');
+			window.close();
+		});
 	});
 </script>
