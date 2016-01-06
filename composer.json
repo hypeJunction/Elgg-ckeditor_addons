@@ -1,6 +1,6 @@
 {
 	"name": "hypejunction/ckeditor_addons",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"type": "elgg-plugin",
 	"description": "Improved CKEditor for Elgg",
 	"homepage": "http://hypejunction.com",
