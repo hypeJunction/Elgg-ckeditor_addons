@@ -20,7 +20,7 @@ CKEDITOR.plugins.add('linkembed', {
 					a.setAttribute('href', href);
 
 					var img = instance.document.createElement('img');
-					img.setAttribute('src', this.path + 'graphics/placeholder.png');
+					img.setAttribute('src', instance.config.linkembedPlaceholder);
 					img.setAttribute('alt', 'linkembed');
 
 					a.setHtml(img.getOuterHtml());

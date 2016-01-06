@@ -29,6 +29,7 @@ $config = [
 	'disableNativeTableHandles' => false,
 	'removeDialogTabs' => ['image:advanced', 'image:Link'],
 	'extraAllowedContent' => $extra_allowed_content,
+	'linkembedPlaceholder' => elgg_get_simplecache_url('components/ckeditor/graphics/placeholder.png'),
 ];
 
 $plugins = ['blockimagepaste' => ['path' => elgg_get_simplecache_url('elgg/ckeditor/blockimagepaste.js')]];
