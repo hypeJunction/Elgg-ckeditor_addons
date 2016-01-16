@@ -77,12 +77,3 @@ if (!$toolbar_config) {
 	));
 	?>
 </div>
-<div>
-	<label><?php echo elgg_echo('ckeditor:setting:upload_max_width') ?></label>
-	<?php
-	echo elgg_view('input/text', array(
-		'name' => 'params[upload_max_width]',
-		'value' => $entity->upload_max_width,
-	));
-	?>
-</div>

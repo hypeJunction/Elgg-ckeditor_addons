@@ -16,8 +16,8 @@ if ($_FILES['upload']['error'] != UPLOAD_ERR_OK) {
 
 $user = elgg_get_logged_in_user_entity();
 
-$max_width = (int) elgg_get_plugin_setting('upload_max_width', 'ckeditor_addons', 600);
-$resized = get_resized_image_from_existing_file($_FILES['upload']['tmp_name'], $max_width, $max_width);
+$resized = get_uploaded_file('upload');
+
 
 if (!$resized) {
 	echo elgg_echo('ckeditor:upload:fail');
@@ -28,7 +28,7 @@ $hash = md5($resized);
 
 $file = new ElggFile();
 $file->owner_guid = $user->guid;
-$file->setFilename("ckeditor/{$hash}.jpg");
+$file->setFilename("ckeditor/$hash");
 $file->open('write');
 $file->write($resized);
 $file->close();
