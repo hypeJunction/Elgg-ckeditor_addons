@@ -153,11 +153,6 @@ function ckeditor_addons_page_handler($segments) {
 			$contents = $file->grabFile();
 			$file->close();
 
-			if (md5($contents) != $hash) {
-				header("HTTP/1.1 403 Forbidden");
-				exit;
-			}
-
 			header("Content-type: image/jpeg");
 			header("Content-type: image/jpg");
 			header("Content-type: image/gif");

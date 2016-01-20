@@ -24,7 +24,9 @@ if (!$resized) {
 	exit;
 }
 
-$hash = md5($resized);
+//unique file name
+
+$hash = md5(uniqid( ) . $resized);
 
 $file = new ElggFile();
 $file->owner_guid = $user->guid;
