@@ -16,7 +16,6 @@ return array(
 	'ckeditor:setting:allow_uploads' => 'Allow file uploads outside of the File plugin flow',
 	'ckeditor:upload:fail' => 'Upload has failed',
 	'ckeditor:upload:not_allowed' => 'Uploads have been disabled by the site administrator',
-	'ckeditor:setting:upload_max_width' => 'Maximum dimension of the uploaded image (in px)',
 	'ckeditor:browse:no_uploads' => 'You have not uploaded any images yet',
 	
 	'ckeditor:link:target:notset' => 'Default',

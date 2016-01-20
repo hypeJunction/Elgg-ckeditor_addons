@@ -142,7 +142,7 @@ function ckeditor_addons_page_handler($segments) {
 
 			$file = new ElggFile();
 			$file->owner_guid = $user_guid;
-			$file->setFilename("ckeditor/{$hash}.jpg");
+			$file->setFilename("ckeditor/$hash");
 
 			if (!$file->exists()) {
 				header("HTTP/1.1 404 Not Found");
@@ -153,12 +153,10 @@ function ckeditor_addons_page_handler($segments) {
 			$contents = $file->grabFile();
 			$file->close();
 
-			if (md5($contents) != $hash) {
-				header("HTTP/1.1 403 Forbidden");
-				exit;
-			}
-
 			header("Content-type: image/jpeg");
+			header("Content-type: image/jpg");
+			header("Content-type: image/gif");
+			header("Content-type: image/png");
 			header("Etag: $hash");
 			header('Expires: ' . date('r', time() + 864000));
 			header("Pragma: public");
