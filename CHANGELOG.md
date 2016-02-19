@@ -1,3 +1,19 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v3.0.0) (2016-02-19)
+
+
+### Features
+
+* **uploads:** upgrade embeded files to entities ([0243794](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/0243794))
+
+
+### BREAKING CHANGES
+
+* uploads: Images uploaded prior to this change will still be visible in posts, however
+they will no longer be listed in the Browse the Server popup window
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.1...v2.0.3) (2016-01-06)
 
