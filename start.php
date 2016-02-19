@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/autoloader.php';
+
 elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
 
 /**
@@ -21,7 +23,6 @@ function ckeditor_addons_init() {
 	}
 
 	elgg_extend_view('elgg.css', 'components/ckeditor/browser.css');
-
 }
 
 /**
@@ -129,12 +130,17 @@ function ckeditor_addons_page_handler($segments) {
 		case 'image' :
 			$user_guid = $segments[1];
 			$hash = $segments[2];
+			$ext = $segments[3];
 
 			if (!$user_guid || !$hash) {
 				header("HTTP/1.1 400 Bad Request");
 				exit;
 			}
 
+			if (!in_array($ext, array('jpg', 'gif'))) {
+				$ext = 'jpg';
+			}
+			
 			if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == "\"$hash\"") {
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -142,7 +148,7 @@ function ckeditor_addons_page_handler($segments) {
 
 			$file = new ElggFile();
 			$file->owner_guid = $user_guid;
-			$file->setFilename("ckeditor/{$hash}.jpg");
+			$file->setFilename("ckeditor/{$hash}.{$ext}");
 
 			if (!$file->exists()) {
 				header("HTTP/1.1 404 Not Found");
