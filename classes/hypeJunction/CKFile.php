@@ -2,6 +2,8 @@
 
 namespace hypeJunction;
 
+use ElggFile;
+
 class CKFile extends ElggFile {
 
 	/**
