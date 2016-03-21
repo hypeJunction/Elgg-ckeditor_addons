@@ -6,5 +6,7 @@
  */
 ?>
 <script>
-	require(['components/ckeditor']);
+	require(['components/ckeditor'], function(func) {
+		func.call();
+	});
 </script>
