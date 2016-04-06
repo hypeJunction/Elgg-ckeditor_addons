@@ -7,8 +7,16 @@ Extensions for CKEditor in Elgg
 * Separate editor configuration for regular users and admins
 * Easy to use admin interface
 * Simple file uploads and embeds (no file entities)
+* Embed statis assets from filestore (for admins)
 * Simple and htmlawed-compatible link embeds (using hypeScraper)
 * Text tooltips
+
+
+### Notes
+
+* Admin users can embed static assets (if uploads are enabled). Create a folder in your dataroot `/ckeditor/assets/` and place your image files in there.
+They will show up when you use Browse Server feature after you flush the caches.
+
 
 ### Acknowledgements
 

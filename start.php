@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/autoloader.php';
 
 elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
@@ -23,6 +22,8 @@ function ckeditor_addons_init() {
 	}
 
 	elgg_extend_view('elgg.css', 'components/ckeditor/browser.css');
+
+	elgg_register_plugin_hook_handler('view', 'output/longtext', 'ckeditor_addons_rewrite_asset_urls');
 }
 
 /**
@@ -140,7 +141,7 @@ function ckeditor_addons_page_handler($segments) {
 			if (!in_array($ext, array('jpg', 'gif'))) {
 				$ext = 'jpg';
 			}
-			
+
 			if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == "\"$hash\"") {
 				header("HTTP/1.1 304 Not Modified");
 				exit;
@@ -175,7 +176,44 @@ function ckeditor_addons_page_handler($segments) {
 
 			echo $contents;
 			exit;
+
+		case 'assets' :
+			array_unshift($segments, 'ckeditor');
+			$view = implode('/', $segments);
+			forward(elgg_get_simplecache_url($view));
+			break;
 	}
 
 	return false;
+}
+
+/**
+ * Rewrite static asset URLs to simplecache URLs
+ *
+ * @param string $hook   "view"
+ * @param string $type   "output/longtext"
+ * @param string $return View
+ * @param array  $params Hook params
+ * @return string
+ */
+function ckeditor_addons_rewrite_asset_urls($hook, $type, $return, $params) {
+
+	$callback = function($m) {
+		$site_url = elgg_get_site_url();
+		$url = elgg_normalize_url($m[0]);
+		if (strpos($url, $site_url) === 0) {
+			$url = substr($url, strlen($site_url));
+		}
+
+		$segments = explode('/', parse_url($url, PHP_URL_PATH));
+
+		if ($segments[0] == 'ckeditor' && $segments[1] == 'assets') {
+			$url = elgg_get_simplecache_url(implode('/', $segments));
+		}
+
+		return elgg_normalize_url($url);
+	};
+
+	$pattern = "/(ht|f)tps?:\/\/[^\s\r\n\t<>\"\']+/";
+	return preg_replace_callback($pattern, $callback, $return);
 }
