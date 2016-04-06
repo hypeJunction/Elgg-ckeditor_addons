@@ -1,3 +1,25 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v3.1.0) (2016-04-06)
+
+
+### Bug Fixes
+
+* **classes:** add missing use statement ([46e834b](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/46e834b))
+* **js:** ckeditor is again instantiated when appended via AJAX ([a9b918b](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/a9b918b))
+
+### Features
+
+* **js:** editor now responds to form reset event ([90428ed](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/90428ed))
+* **uploads:** upgrade embeded files to entities ([0243794](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/0243794))
+
+
+### BREAKING CHANGES
+
+* uploads: Images uploaded prior to this change will still be visible in posts, however
+they will no longer be listed in the Browse the Server popup window
+
+
+
 <a name="3.0.2"></a>
 ## [3.0.2](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v3.0.2) (2016-03-21)
 
