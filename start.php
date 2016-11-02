@@ -69,7 +69,7 @@ function ckeditor_addons_get_toolbar($type = null) {
  * @return array
  */
 function ckeditor_addons_get_toolbar_defaults() {
-	$defaults = ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Strike', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'Image', 'Blockquote', 'Paste', 'PasteFromWord', 'Maximize'];
+	$defaults = ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Strike', 'NumberedList', 'BulletedList', 'Undo', 'Redo', 'Link', 'Unlink', 'Image', 'Blockquote', 'Textarea', 'Paste', 'PasteFromWord', 'Maximize'];
 	return elgg_trigger_plugin_hook('toolbar:defaults', 'ckeditor', null, $defaults);
 }
 
