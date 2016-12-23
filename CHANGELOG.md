@@ -1,3 +1,20 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/3.1.0...v4.0.0) (2016-09-15)
+
+
+### Features
+
+* **releases:** upgrade to Elgg 2.2 ([5d22ef7](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/5d22ef7))
+
+
+### BREAKING CHANGES
+
+* releases: Now requires Elgg 2.2
+Refactors the JS, some of the views were removed for compatibility with
+the modified elgg/ckeditor module
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v3.1.0) (2016-04-06)
 
