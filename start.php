@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/autoloader.php';
 
 elgg_register_event_handler('init', 'system', 'ckeditor_addons_init');
@@ -160,22 +161,13 @@ function ckeditor_addons_page_handler($segments) {
 			$contents = $file->grabFile();
 			$file->close();
 
-			if (md5($contents) != $hash) {
+			if (strcmp(md5($contents), $hash) !== 0) {
 				header("HTTP/1.1 403 Forbidden");
 				exit;
 			}
 
-			header("Content-type: image/jpeg");
-			header("Etag: $hash");
-			header('Expires: ' . date('r', time() + 864000));
-			header("Pragma: public");
-			header("Cache-Control: public");
-			header("Content-Length: " . $file->getSize());
-
-			ob_get_clean();
-
-			echo $contents;
-			exit;
+			forward(elgg_get_inline_url($file, true));
+			break;
 
 		case 'assets' :
 			array_unshift($segments, 'ckeditor');

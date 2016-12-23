@@ -1,6 +1,7 @@
 <?php
 
 use hypeJunction\CKFile;
+
 if (!headers_sent()) {
 	header("Content-type: text/html");
 }
@@ -10,8 +11,21 @@ if (!elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons')) {
 	exit;
 }
 
-if ($_FILES['upload']['error'] != UPLOAD_ERR_OK) {
-	echo elgg_get_friendly_upload_error($_FILES['upload']['error']);
+$uploads = elgg_get_uploaded_files('upload');
+$upload = array_shift($uploads);
+/* @var $upload \Symfony\Component\HttpFoundation\File\UploadedFile */
+
+if (!$upload) {
+	echo elgg_format_element('div', [
+		'class' => 'elgg-box-error',
+			], elgg_echo('ckeditor:upload:fail'));
+	exit;
+}
+
+if (!$upload->isValid()) {
+	echo elgg_format_element('div', [
+		'class' => 'elgg-box-error',
+			], elgg_get_friendly_upload_error($upload->getError()));
 	exit;
 }
 
@@ -21,54 +35,45 @@ $user = elgg_get_logged_in_user_entity();
 
 $file = new CKFile();
 $file->owner_guid = $user->guid;
+$file->access_id = ACCESS_PUBLIC;
 
-$mimetype = $file->detectMimeType($_FILES['upload']['tmp_name'], $_FILES['upload']['type']);
+$file->acceptUploadedFile($upload);
 
-switch ($mimetype) {
-	case 'image/png' :
-	case 'image/jpeg' :
-	case 'image/jpg' :
-		$ext = 'jpg';
-		$max_width = (int) elgg_get_plugin_setting('upload_max_width', 'ckeditor_addons', 600);
-		$contents = get_resized_image_from_existing_file($_FILES['upload']['tmp_name'], $max_width, $max_width);
-		break;
+switch ($file->getMimeType()) {
 
 	case 'image/gif' :
-		$ext = 'gif';
-		$contents = file_get_contents($_FILES['upload']['tmp_name']);
+		$result = $file->exists();
 		break;
+
+	default :
+		$max_width = (int) elgg_get_plugin_setting('upload_max_width', 'ckeditor_addons', 600);
+		$result = elgg_save_resized_image($file->getFilenameOnFilestore(), null, [
+			'w' => 600,
+			'h' => 600,
+			'square' => false,
+			'upscale' => false,
+		]);
+		break;
+
 }
 
-if (!$contents) {
-	echo elgg_echo('ckeditor:upload:fail');
-	exit;
-}
-
-$hash = md5($contents);
-$file->setFilename("ckeditor/{$hash}.{$ext}");
-
-$file->open('write');
-$file->write($contents);
-$file->close();
-
-$file->access_id = ACCESS_PUBLIC;
-$file->hash = $hash;
-$file->ext = $ext;
-
-$file->setMimeType($mimetype);
-$file->simpletype = 'image';
-$file->originalfilename = $_FILES['upload']['name'];
-
-if (!$file->exists() || !$file->save()) {
+if (!$result) {
 	$file->delete();
-	echo elgg_echo('ckeditor:upload:fail');
+	echo elgg_format_element('div', [
+		'class' => 'elgg-box-error',
+			], elgg_echo('ckeditor:upload:fail'));
 	exit;
 }
+
+$hash = md5(file_get_contents($file->getFilenameOnFilestore()));
+$ext = $upload->getClientOriginalExtension();
+
+$file->transfer($file->owner_guid, "ckeditor/{$hash}.{$ext}");
 
 $url = elgg_normalize_url("ckeditor/image/{$user->guid}/{$hash}/{$ext}");
 ?>
 <script>
-	window.parent.CKEDITOR.tools.callFunction('<?php echo $callback ?>', '<?php echo $url ?>', '');
+	window.parent.CKEDITOR.tools.callFunction(<?= json_encode($callback) ?>, <?= json_encode($url) ?>, '');
 </script>
 <?php
 exit;
