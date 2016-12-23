@@ -1,3 +1,32 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v5.0.0) (2016-12-23)
+
+
+### Bug Fixes
+
+* **classes:** add missing use statement ([46e834b](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/46e834b))
+* **js:** ckeditor is again instantiated when appended via AJAX ([a9b918b](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/a9b918b))
+
+### Features
+
+* **deps:** now requires Elgg 2.3 ([f23d589](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/f23d589))
+* **files:** switch to the improved file and upload handling API ([ea88b71](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/ea88b71))
+* **js:** editor now responds to form reset event ([90428ed](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/90428ed))
+* **releases:** upgrade to Elgg 2.2 ([5d22ef7](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/5d22ef7))
+* **uploads:** upgrade embeded files to entities ([0243794](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/0243794))
+
+
+### BREAKING CHANGES
+
+* deps: Now requires Elgg 2.3
+* releases: Now requires Elgg 2.2
+Refactors the JS, some of the views were removed for compatibility with
+the modified elgg/ckeditor module
+* uploads: Images uploaded prior to this change will still be visible in posts, however
+they will no longer be listed in the Browse the Server popup window
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/3.1.0...v4.0.0) (2016-09-15)
 
