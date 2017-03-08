@@ -36,15 +36,9 @@ $user_toolbar = ckeditor_addons_get_toolbar('user');
 
 $plugins = ['blockimagepaste' => ['path' => elgg_get_simplecache_url('elgg/ckeditor/blockimagepaste.js')]];
 
+$allow_uploads = 0;
 if (ckeditor_addons_is_enabled('Image')) {
-	if (elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons')) {
-		$config = array_merge($config, [
-			'filebrowserBrowseUrl' => elgg_normalize_url('ckeditor/browse'),
-			'filebrowserUploadUrl' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/ckeditor/upload')),
-			'filebrowserImageWindowWidth' => '640',
-			'filebrowserImageWindowHeight' => '480'
-		]);
-	}
+	$allow_uploads = elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons', 0);
 }
 
 if (ckeditor_addons_is_enabled('LinkEmbed') && elgg_is_active_plugin('hypeScraper')) {
@@ -81,7 +75,17 @@ $config['removeDialogTabs'] = implode(';', $config['removeDialogTabs']);
 		elgg.register_hook_handler('config', 'ckeditor', function (hook, type, params, config) {
 			config = config || {};
 			var custom = <?php echo json_encode($config) ?>;
+
 			custom.toolbar = elgg.is_admin_logged_in() ? <?php echo json_encode($admin_toolbar) ?> : <?php echo json_encode($user_toolbar) ?>;
+
+			var allowUploads = <?php echo $allow_uploads ?>;
+			if (allowUploads) {
+				custom.filebrowserBrowseUrl = elgg.normalize_url('ckeditor/browse');
+				custom.filebrowserUploadUrl = elgg.security.addToken(elgg.normalize_url('action/ckeditor/upload'));
+				custom.filebrowserImageWindowWidth = '640';
+				custom.filebrowserImageWindowHeight = '480';
+			}
+
 			return $.extend({}, config, custom);
 		});
 
