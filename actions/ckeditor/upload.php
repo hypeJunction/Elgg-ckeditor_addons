@@ -70,6 +70,8 @@ $ext = $upload->getClientOriginalExtension();
 
 $file->transfer($file->owner_guid, "ckeditor/{$hash}.{$ext}");
 
+$file->hash = $hash;
+$file->ext = $ext;
 $file->save();
 
 $url = elgg_normalize_url("ckeditor/image/{$user->guid}/{$hash}/{$ext}");

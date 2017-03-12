@@ -140,10 +140,6 @@ function ckeditor_addons_page_handler($segments) {
 				exit;
 			}
 
-			if (!in_array($ext, array('jpg', 'gif'))) {
-				$ext = 'jpg';
-			}
-
 			if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == "\"$hash\"") {
 				header("HTTP/1.1 304 Not Modified");
 				exit;
