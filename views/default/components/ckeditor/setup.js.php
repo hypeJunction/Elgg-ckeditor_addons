@@ -15,7 +15,8 @@ $extra_allowed_content['a']['attributes'] = '!href,target,title';
 
 $path = elgg_get_simplecache_url('ckeditor/');
 $config = [
-	'allowedContent' => true,
+	//'allowedContent' => true,
+	'disallowedContent' => 'img{width,height}',
 	'baseHref' => elgg_get_site_url(),
 	'removePlugins' => ['tabletools', 'resize'],
 	'extraPlugins' => ['blockimagepaste'],
@@ -27,7 +28,7 @@ $config = [
 	'disableNativeSpellChecker' => false,
 	'disableNativeTableHandles' => false,
 	'removeDialogTabs' => ['image:advanced', 'image:Link'],
-	'extraAllowedContent' => $extra_allowed_content,
+	'extraAllowedContent' => ['img[width,height]', $extra_allowed_content],
 	'linkembedPlaceholder' => elgg_get_simplecache_url('components/ckeditor/graphics/placeholder.png'),
 ];
 
