@@ -1,3 +1,16 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.0.0...v5.1.0) (2017-04-08)
+
+
+### Bug Fixes
+
+* **uploads:** correctly display (new) uploaded images in all image filetypes supported by cked ([7a9ed53](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/7a9ed53))
+* **uploads:** display existing images on browsing ([0284f0f](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/0284f0f))
+* **uploads:** save ckeditor_file entity on upload processing ([273f85f](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/273f85f))
+* **uploads:** uploads works also with caching enabled ([8a9172c](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/8a9172c))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/2.0.3...v5.0.0) (2016-12-23)
 
