@@ -51,8 +51,10 @@ if (ckeditor_addons_is_enabled('Tooltip')) {
 	$plugins['tooltip'] = ['path' => elgg_get_simplecache_url('components/ckeditor/tooltip.js')];
 }
 
-$config['extraPlugins'][] = 'resize';
 $config['extraPlugins'][] = 'autogrow';
+
+$config['extraPlugins'][] = 'resize';
+$plugins['resize'] = ['path' => elgg_get_simplecache_url('components/ckeditor/plugins/resize/plugin.js')];
 
 $config['removePlugins'] = implode(',', $config['removePlugins']);
 $config['extraPlugins'] = implode(',', $config['extraPlugins']);
