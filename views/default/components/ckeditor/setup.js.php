@@ -52,6 +52,7 @@ if (ckeditor_addons_is_enabled('Tooltip')) {
 }
 
 $config['extraPlugins'][] = 'resize';
+$config['extraPlugins'][] = 'autogrow';
 
 $config['removePlugins'] = implode(',', $config['removePlugins']);
 $config['extraPlugins'] = implode(',', $config['extraPlugins']);
