@@ -1,3 +1,13 @@
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.1.0...v5.2.0) (2017-04-09)
+
+
+### Features
+
+* **addons:** add autogrow plugin ([fb1fba7](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/fb1fba7))
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.0.0...v5.1.0) (2017-04-08)
 
