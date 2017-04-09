@@ -1,3 +1,18 @@
+<a name="5.2.1"></a>
+## [5.2.1](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.1.0...v5.2.1) (2017-04-09)
+
+
+### Bug Fixes
+
+* **addons:** properly add resize plugin ([e4ef55b](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/e4ef55b))
+
+### Features
+
+* **addons:** add autogrow plugin ([fb1fba7](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/fb1fba7))
+* **css:** reset the ugly css ([44ccb19](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/44ccb19))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.1.0...v5.2.0) (2017-04-09)
 
