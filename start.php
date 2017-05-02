@@ -14,18 +14,6 @@ function ckeditor_addons_init() {
 	elgg_extend_view('elgg.js', 'components/ckeditor/setup.js');
 
 	elgg_register_action('ckeditor_addons/settings/save', __DIR__ . '/actions/settings/save.php', 'admin');
-	elgg_register_action('ckeditor/upload', __DIR__ . '/actions/ckeditor/upload.php');
-
-	elgg_register_page_handler('ckeditor', 'ckeditor_addons_page_handler');
-
-	if (elgg_is_active_plugin('hypeScraper')) {
-		elgg_extend_view('elgg.css', 'components/ckeditor/linkembed.css');
-		elgg_extend_view('output/longtext', 'ckeditor/linkembed');
-	}
-
-	elgg_extend_view('elgg.css', 'components/ckeditor/browser.css');
-
-	elgg_register_plugin_hook_handler('view', 'output/longtext', 'ckeditor_addons_rewrite_asset_urls');
 }
 
 /**
@@ -85,7 +73,7 @@ function ckeditor_addons_get_toolbar_options() {
 		'clipboard' => ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'],
 		'editing' => ['Find', 'Replace', 'SelectAll', 'Scayt'],
 		'links' => ['Link', 'Unlink', 'Anchor'],
-		'insert' => ['Image', 'LinkEmbed', 'Tooltip', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'],
+		'insert' => ['Image', 'Tooltip', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'],
 		'styles' => ['Styles', 'Format', 'Font', 'FontSize'],
 		'colors' => ['TextColor', 'BGColor'],
 		'tools' => ['Maximize', 'ShowBlocks'],
@@ -111,98 +99,4 @@ function ckeditor_addons_is_enabled($button = '', $type = null) {
 		}
 	}
 	return false;
-}
-
-/**
- * Handles browser pages
- *
- * @param array $segments An array of URL segments
- * @return boolean
- */
-function ckeditor_addons_page_handler($segments) {
-
-	if (!elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons')) {
-		return false;
-	}
-
-	switch ($segments[0]) {
-		case 'browse':
-			echo elgg_view_resource('ckeditor/browse');
-			return true;
-
-		case 'image' :
-			$user_guid = $segments[1];
-			$hash = $segments[2];
-			$ext = $segments[3];
-
-			if (!$user_guid || !$hash) {
-				header("HTTP/1.1 400 Bad Request");
-				exit;
-			}
-
-			if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == "\"$hash\"") {
-				header("HTTP/1.1 304 Not Modified");
-				exit;
-			}
-
-			$file = new ElggFile();
-			$file->owner_guid = $user_guid;
-			$file->setFilename("ckeditor/{$hash}.{$ext}");
-
-			if (!$file->exists()) {
-				header("HTTP/1.1 404 Not Found");
-				exit;
-			}
-
-			$file->open('read');
-			$contents = $file->grabFile();
-			$file->close();
-
-			if (strcmp(md5($contents), $hash) !== 0) {
-				header("HTTP/1.1 403 Forbidden");
-				exit;
-			}
-
-			forward(elgg_get_inline_url($file, true));
-			break;
-
-		case 'assets' :
-			array_unshift($segments, 'ckeditor');
-			$view = implode('/', $segments);
-			forward(elgg_get_simplecache_url($view));
-			break;
-	}
-
-	return false;
-}
-
-/**
- * Rewrite static asset URLs to simplecache URLs
- *
- * @param string $hook   "view"
- * @param string $type   "output/longtext"
- * @param string $return View
- * @param array  $params Hook params
- * @return string
- */
-function ckeditor_addons_rewrite_asset_urls($hook, $type, $return, $params) {
-
-	$callback = function($m) {
-		$site_url = elgg_get_site_url();
-		$url = elgg_normalize_url($m[0]);
-		if (strpos($url, $site_url) === 0) {
-			$url = substr($url, strlen($site_url));
-		}
-
-		$segments = explode('/', parse_url($url, PHP_URL_PATH));
-
-		if ($segments[0] == 'ckeditor' && $segments[1] == 'assets') {
-			$url = elgg_get_simplecache_url(implode('/', $segments));
-		}
-
-		return elgg_normalize_url($url);
-	};
-
-	$pattern = "/(ht|f)tps?:\/\/[^\s\r\n\t<>\"\']+/";
-	return preg_replace_callback($pattern, $callback, $return);
 }

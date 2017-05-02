@@ -28,7 +28,6 @@ $config = [
 	'disableNativeTableHandles' => false,
 	'removeDialogTabs' => ['image:advanced', 'image:Link'],
 	'extraAllowedContent' => $extra_allowed_content,
-	'linkembedPlaceholder' => elgg_get_simplecache_url('components/ckeditor/graphics/placeholder.png'),
 ];
 
 $admin_toolbar = ckeditor_addons_get_toolbar('admin');
@@ -39,11 +38,6 @@ $plugins = ['blockimagepaste' => ['path' => elgg_get_simplecache_url('elgg/ckedi
 $allow_uploads = 0;
 if (ckeditor_addons_is_enabled('Image')) {
 	$allow_uploads = elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons', 0);
-}
-
-if (ckeditor_addons_is_enabled('LinkEmbed') && elgg_is_active_plugin('hypeScraper')) {
-	$config['extraPlugins'][] = 'linkembed';
-	$plugins['linkembed'] = ['path' => elgg_get_simplecache_url('components/ckeditor/linkembed.js')];
 }
 
 if (ckeditor_addons_is_enabled('Tooltip')) {
