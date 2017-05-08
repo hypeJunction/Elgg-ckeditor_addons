@@ -1,3 +1,22 @@
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.2.1...v6.0.0) (2017-05-08)
+
+
+### Features
+
+* **assets:** remove various hacks ([0444be2](https://github.com/hypeJunction/Elgg-ckeditor_addons/commit/0444be2))
+
+
+### BREAKING CHANGES
+
+* assets: Removes file upload and embedding logic, as it does not work consistenly
+accross browsers and installations. Use hypeEmbed plugin for proper
+embedding, and backward compatibility.
+Removed linkembed plugin. Use hypeEmbed plugin for shortcode embedding of
+links
+
+
+
 <a name="5.2.1"></a>
 ## [5.2.1](https://github.com/hypeJunction/Elgg-ckeditor_addons/compare/5.1.0...v5.2.1) (2017-04-09)
 
