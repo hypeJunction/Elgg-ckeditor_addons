@@ -64,25 +64,3 @@ if (!$toolbar_config) {
 		?>
 	</tbody>
 </table>
-<div>
-	<label><?php echo elgg_echo('ckeditor:setting:allow_uploads') ?></label>
-	<?php
-	echo elgg_view('input/dropdown', array(
-		'name' => 'params[allow_uploads]',
-		'value' => $entity->allow_uploads,
-		'options_values' => array(
-			0 => elgg_echo('option:no'),
-			1 => elgg_echo('option:yes')
-		)
-	));
-	?>
-</div>
-<div>
-	<label><?php echo elgg_echo('ckeditor:setting:upload_max_width') ?></label>
-	<?php
-	echo elgg_view('input/text', array(
-		'name' => 'params[upload_max_width]',
-		'value' => $entity->upload_max_width,
-	));
-	?>
-</div>

@@ -35,11 +35,6 @@ $user_toolbar = ckeditor_addons_get_toolbar('user');
 
 $plugins = ['blockimagepaste' => ['path' => elgg_get_simplecache_url('elgg/ckeditor/blockimagepaste.js')]];
 
-$allow_uploads = 0;
-if (ckeditor_addons_is_enabled('Image')) {
-	$allow_uploads = elgg_get_plugin_setting('allow_uploads', 'ckeditor_addons', 0);
-}
-
 if (ckeditor_addons_is_enabled('Tooltip')) {
 	$config['extraPlugins'][] = 'tooltip';
 	$plugins['tooltip'] = ['path' => elgg_get_simplecache_url('components/ckeditor/tooltip.js')];
@@ -74,14 +69,6 @@ $config['removeDialogTabs'] = implode(';', $config['removeDialogTabs']);
 			var custom = <?php echo json_encode($config) ?>;
 
 			custom.toolbar = elgg.is_admin_logged_in() ? <?php echo json_encode($admin_toolbar) ?> : <?php echo json_encode($user_toolbar) ?>;
-
-			var allowUploads = <?php echo $allow_uploads ?>;
-			if (allowUploads) {
-				custom.filebrowserBrowseUrl = elgg.normalize_url('ckeditor/browse');
-				custom.filebrowserUploadUrl = elgg.security.addToken(elgg.normalize_url('action/ckeditor/upload'));
-				custom.filebrowserImageWindowWidth = '640';
-				custom.filebrowserImageWindowHeight = '480';
-			}
 
 			return $.extend({}, config, custom);
 		});
